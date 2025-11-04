@@ -3,33 +3,56 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+function Person() {
+  const [person, setPerson] = useState({ name: "John", age: 100, surname: "bho"});
+
+  // GOOD - Do this!
+  const handleIncreaseAge = () => {
+    // copy the existing person object into a new object
+    // while updating the age property
+    const newPerson = { ...person, age: person.age + 1 };
+    setPerson(newPerson);
+  };
+
+  const updateName = () => {
+    // copy the existing person object into a new object
+    // while updating name
+    const newPerson = { ...person, name: "Jane" };
+    setPerson(newPerson);
+  };
+
+  const updateSurname = () => {
+    // copy the existing person object into a new object
+    // while updating name
+    const newPerson = { ...person, surname: "bho" };
+    setPerson(newPerson);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>{person.name} {person.surname}</h1>
+      <h2>{person.age}</h2>
+      <button onClick={handleIncreaseAge}>Increase age</button>
+      <input 
+        type="text" 
+        value={person.name} 
+        onChange={(e) => {
+          const newPerson = { ...person, name: e.target.value };
+          setPerson(newPerson);
+        }} 
+      />
+      <input 
+        type="text" 
+        value={person.surname} 
+        onChange={(e) => {
+          const newPerson = { ...person, surname: e.target.value };
+          setPerson(newPerson);
+        }} 
+      />
+
     </>
-  )
+  );
 }
 
-export default App
+
+export default Person;
